@@ -1,3 +1,4 @@
+
 """
 Account API Service Test Suite
 
@@ -37,7 +38,7 @@ class TestAccountService(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """Runs once before test suite"""
+        """Runs once after test suite"""
 
     def setUp(self):
         """Runs before each test"""
@@ -123,4 +124,29 @@ class TestAccountService(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
-    # ADD YOUR TEST CASES HERE ...
+    def test_get_account(self):
+        """It should Read a single Account"""
+        # Create an account using the existing helper
+        account = self._create_accounts(1)[0]
+
+        # Read the account by its ID
+        resp = self.client.get(f"{BASE_URL}/{account.id}")
+
+        # Check the response
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+
+        data = resp.get_json()
+        self.assertEqual(data["id"], account.id)
+        self.assertEqual(data["name"], account.name)
+        self.assertEqual(data["email"], account.email)
+        self.assertEqual(data["address"], account.address)
+        self.assertEqual(data["phone_number"], account.phone_number)
+        self.assertEqual(data["date_joined"], str(account.date_joined))
+
+    def test_get_account_not_found(self):
+        """It should return 404 when an Account does not exist"""
+        resp = self.client.get(f"{BASE_URL}/0")
+        self.assertEqual(
+            resp.status_code,
+            status.HTTP_404_NOT_FOUND,
+        )
