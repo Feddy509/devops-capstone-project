@@ -1,3 +1,4 @@
+```python
 """
 Account Service
 
@@ -57,6 +58,7 @@ def create_accounts():
         jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
     )
 
+
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
@@ -75,8 +77,6 @@ def list_accounts():
 ######################################################################
 # READ AN ACCOUNT
 ######################################################################
-
-
 @app.route("/accounts/<int:account_id>", methods=["GET"])
 def read_account(account_id):
     """Reads an Account by its ID."""
@@ -90,11 +90,9 @@ def read_account(account_id):
     return account.serialize(), status.HTTP_200_OK
 
 
-
 ######################################################################
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
-
 @app.route("/accounts/<int:account_id>", methods=["PUT"])
 def update_account(account_id):
     """Updates an existing Account."""
@@ -116,7 +114,6 @@ def update_account(account_id):
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
-
 @app.route("/accounts/<int:account_id>", methods=["DELETE"])
 def delete_account(account_id):
     """Deletes an Account."""
@@ -147,3 +144,4 @@ def check_content_type(media_type):
         status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
         f"Content-Type must be {media_type}",
     )
+```
