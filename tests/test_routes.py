@@ -175,5 +175,3 @@ class TestAccountService(TestCase):
         # Verify the account was deleted
         resp = self.client.get(f"{BASE_URL}/{account.id}")
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
-
-    
