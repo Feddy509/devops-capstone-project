@@ -15,7 +15,7 @@ spec:
   params:
     - name: repo-url
     - name: branch
-      default: main
+    - default: cd-pipeline
   tasks:
     - name: init
       workspaces:
